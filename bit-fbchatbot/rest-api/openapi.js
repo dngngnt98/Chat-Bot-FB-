@@ -4,7 +4,7 @@ const searchNewAddress = (searchWord) => {
     request({
         uri: 'http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdService/retrieveNewAdressAreaCdService/getNewAddressListAreaCd',
         qs: {
-            'ServiceKey': 'latXqMWaqTQzm9UOSNHm % 2 Bl6lmeKMbgyb58z5CznKjBGjpvmcH6tXpB % 2 BHSrvWo6HzOrEkkqHMZc6xITF61mfUrQ % 3 D % 3 D',
+            'ServiceKey': '7zzoOgBYZmF97yjzJb7C3cgqXqCe1ImhV21M93fB8BTiVfhBhOgD4I9Mr3Hd3NE8AnpalmxuYoNwLOAUkafA1Q%3D%3D',
             'searchSe': 'dong',
             'srchwrd': encodeURIComponent('searchWord'),
             'countPerPage': '10',
