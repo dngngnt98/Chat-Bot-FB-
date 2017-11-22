@@ -15,10 +15,6 @@ const sendTextMessage = (recipientId, messageText) => {
     api.callMessagesAPI(messageData);
 }
 
-const handleReceivePostback = (event) => {
-    console.log('postback')
-};
-
 
 const sendImageMessage = (recipientId) => {
     var messageData = {
