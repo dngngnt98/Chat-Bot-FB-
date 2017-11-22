@@ -1,4 +1,5 @@
 const request = require('request')
+require('dotenv').config({ path: '/home/ec2-user/vars/.env' })
 
 const searchNewAddress = (type, searchWord) => {
 
