@@ -16,13 +16,14 @@ const handleReceiveMessage = (event) => {
 
     if (messageText == 'led') {
         sendApi.sendLedMessage(senderID)
-    } else if (messageText.startsWith('searchAddress')){
-		try{
-			var arr = messageText.split(':')[1].split('=');
-			openAPI.searchNewAddress(arr[0],arr[1]);
-		} catch(err){
-			console.log(err)
-		}
+    } else if (messageText.startsWith('searchAddress')) {
+        try {
+            var arr = messageText.split(':')[1].split('=');
+            openAPI.searchNewAddress(arr[0], arr[1]);
+            //sendApi.sendTextMessage(senderID, );
+        } catch (err) {
+            console.log(err)
+        }
     } else {
         sendApi.sendTextMessage(senderID, messageText);
     }
@@ -41,7 +42,7 @@ const handleReceivePostback = (event) => {
         sendApi.sendTextMessage(senderID, "전구를 켜겠습니다.");
     } else if (payload == 'led_off') {
         sendApi.sendTextMessage(senderID, "전구를 끄겠습니다.");
-    } 
+    }
 };
 
 module.exports = {
