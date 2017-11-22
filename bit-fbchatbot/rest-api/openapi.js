@@ -27,8 +27,8 @@ const searchNewAddress = (type, searchWord) => {
     });
 };
 
-searchNewAddress('road', '양도로 18');
+//searchNewAddress('road', '양도로 18');
 
 module.exports = {
-    // searchNewAddress
+	searchNewAddress
 };
