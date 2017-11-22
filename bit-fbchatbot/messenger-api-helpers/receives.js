@@ -16,10 +16,12 @@ const handleReceiveMessage = (event) => {
 
     if (messageText == 'led') {
         sendApi.sendLedMessage(senderID)
-    } else if (messageText.startsWith('searchAddress')) {
+    } else if (messageText.startsWith('주소검색')) {
         try {
             var arr = messageText.split(':')[1].split('=');
-            openAPI.searchNewAddress(arr[0], arr[1]);
+            openAPI.searchNewAddress(arr[0], arr[1], (msg) => {
+                sendApi.sendTextMessage(senderID, msg);
+            });
             //sendApi.sendTextMessage(senderID, );
         } catch (err) {
             console.log(err)

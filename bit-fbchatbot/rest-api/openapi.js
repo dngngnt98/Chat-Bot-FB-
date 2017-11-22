@@ -1,7 +1,8 @@
-const request = require('request')
+const request = require('request');
+const parseString = require('xml2js').parseString;
 require('dotenv').config({ path: '/home/ec2-user/vars/.env' })
 
-const searchNewAddress = (type, searchWord) => {
+const searchNewAddress = (type, searchWord, callback) => {
 
     var url = 'http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdService/retrieveNewAdressAreaCdService/getNewAddressListAreaCd';
     var queryString = '?ServiceKey=' + process.env.OPENAPI_KEY; /* Service Key*/
@@ -12,23 +13,40 @@ const searchNewAddress = (type, searchWord) => {
 
     request({
         uri: url + queryString,
-        // uri: 'http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdService/retrieveNewAdressAreaCdService/getNewAddressListAreaCd',
-        // qs: {
-        //     'ServiceKey': '7zzoOgBYZmF97yjzJb7C3cgqXqCe1ImhV21M93fB8BTiVfhBhOgD4I9Mr3Hd3NE8AnpalmxuYoNwLOAUkafA1Q%3D%3D',
-        //     'searchSe': 'dong',
-        //     'srchwrd': encodeURIComponent('searchWord'),
-        //     'countPerPage': '10',
-        //     'currentPage': '1'
-        // },
+
     }, function(error, response, body) {
-        console.log('=>Status', response.statusCode);
-        console.log('=>Headers', JSON.stringify(response.headers));
+        // console.log('=>Status', response.statusCode);
+        // console.log('=>Headers', JSON.stringify(response.headers));
         console.log('=>Reponse received', body);
+        parseString(body, (err, result) => {
+            var headers = result.NewAddressListResponse.cmmMsgHeader[0];
+            var totalCount = headers.totalCount[0];
+            var countPerPage = headers.countPerPage[0];
+            var currentPage = headers.currentPage[0];
+
+            console.log('[주소검색결과]')
+            console.log(totalCount);
+            console.log(countPerPage);
+            console.log(currentPage);
+            console.log('-----------------------------------------');
+
+            var message = '';
+            var addList = result.NewAddressListResponse.newAddressListAreaCd;
+            for (var addr of addList) {
+                message += '[' + addr.zipNo[0] + ']\n';
+                message += '[' + addr.rnAdres[0] + ']\n';
+                message += '[' + addr.lnmAdres[0] + ']\n';
+                message += '\n';
+            }
+
+            callback(message);
+
+        });
     });
 };
 
 //searchNewAddress('road', '양도로 18');
 
 module.exports = {
-	searchNewAddress
+    searchNewAddress
 };
