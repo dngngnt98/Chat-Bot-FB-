@@ -27,7 +27,7 @@ const searchNewAddress = (searchWord) => {
         console.log('=>Reponse received', body);
     });
 };
-searchNewAddress('풍무동147')
+searchNewAddress('풍무동 147')
 module.exports = {
     // searchNewAddress
 };
