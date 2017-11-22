@@ -1,6 +1,5 @@
 const request = require('request');
 const parseString = require('xml2js').parseString;
-require('dotenv').config({ path: '/home/ec2-user/vars/.env' })
 
 const searchNewAddress = (type, searchWord, callback) => {
 
