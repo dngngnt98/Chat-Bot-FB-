@@ -34,8 +34,8 @@ const searchNewAddress = (type, searchWord, callback) => {
             var addList = result.NewAddressListResponse.newAddressListAreaCd;
             for (var addr of addList) {
                 message += '[' + addr.zipNo[0] + ']\n';
-                message += '[' + addr.rnAdres[0] + ']\n';
-                message += '[' + addr.lnmAdres[0] + ']\n';
+                message += addr.rnAdres[0] + '\n';
+                message += addr.lnmAdres[0] + '\n';
                 message += '\n';
             }
 
